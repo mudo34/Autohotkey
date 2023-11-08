@@ -1,0 +1,17 @@
+#IfWinActive ahk_exe Discord.exe
+
+^v:: ; ペーストするときtwitterだったらfxtwitterにする
+  cb_bk := clipboardall
+  rep := clipboard
+  if(rep==""){
+    send, ^v
+    return
+    }
+  rep := RegExReplace(rep, "^https?:`/`/(twitter|x)`.com`/", "https://fxtwitter.com/")
+  clipboard := rep
+  send, ^v
+  sleep, 100
+  clipboard := cb_bk
+  return
+
+#IfWinActive
